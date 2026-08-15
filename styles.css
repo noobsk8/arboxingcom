@@ -200,6 +200,37 @@ h3 {
   justify-content: center;
 }
 
+.video-phone {
+  aspect-ratio: 9 / 18.7;
+  background: #050505;
+  border: 12px solid #050505;
+  border-radius: 36px;
+  box-shadow: 0 34px 80px rgba(0, 0, 0, 0.5);
+  max-width: 390px;
+  overflow: hidden;
+  position: relative;
+  width: min(82vw, 390px);
+}
+
+.video-phone::after {
+  background: #050505;
+  border-radius: 999px;
+  content: "";
+  height: 24px;
+  left: 50%;
+  position: absolute;
+  top: 10px;
+  transform: translateX(-50%);
+  width: 96px;
+}
+
+.video-phone video {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
 .phone {
   aspect-ratio: 9 / 18.7;
   background:
