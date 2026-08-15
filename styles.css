@@ -506,7 +506,9 @@ h3 {
 }
 
 .feature-panel.large,
-.timer-panel {
+.timer-panel,
+.screenshot-panel,
+.progress-grid {
   align-items: center;
   grid-template-columns: 1fr 0.85fr;
 }
@@ -533,6 +535,41 @@ h3 {
 .timer-panel .phone {
   max-width: 280px;
   width: min(60vw, 280px);
+}
+
+.screenshot-frame {
+  background: #050505;
+  border: 10px solid #050505;
+  border-radius: 34px;
+  box-shadow: 0 26px 66px rgba(0, 0, 0, 0.42);
+  justify-self: center;
+  margin: 0;
+  max-width: 280px;
+  overflow: hidden;
+  position: relative;
+  width: min(58vw, 280px);
+}
+
+.screenshot-frame::after {
+  background: #050505;
+  border-radius: 999px;
+  content: "";
+  height: 22px;
+  left: 50%;
+  position: absolute;
+  top: 8px;
+  transform: translateX(-50%);
+  width: 88px;
+}
+
+.screenshot-frame img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.inline-shot {
+  margin-top: 32px;
 }
 
 .target-list,
@@ -567,6 +604,11 @@ h3 {
 
 .progress {
   border-top: 1px solid var(--line);
+}
+
+.progress-grid {
+  display: grid;
+  gap: 40px;
 }
 
 .privacy-panel,
@@ -733,7 +775,9 @@ h3 {
   .hero-grid,
   .split,
   .feature-panel.large,
-  .timer-panel {
+  .timer-panel,
+  .screenshot-panel,
+  .progress-grid {
     grid-template-columns: 1fr;
   }
 
