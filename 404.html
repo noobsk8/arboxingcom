@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>AR Boxing</title>
+  </head>
+  <body>
+    <p id="message">Redirecting to AR Boxing...</p>
+    <script>
+      (function () {
+        var path = window.location.pathname || "/";
+        var looksLikeAsset = /\.[a-z0-9]{2,8}$/i.test(path);
+
+        if (looksLikeAsset) {
+          document.getElementById("message").textContent = "Page not found.";
+          return;
+        }
+
+        var params = new URLSearchParams(window.location.search);
+        params.set("campaign_path", path);
+        window.location.replace("/?" + params.toString() + window.location.hash);
+      })();
+    </script>
+  </body>
+</html>

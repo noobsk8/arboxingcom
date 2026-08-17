@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-page="home">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,6 +18,8 @@
     <meta name="twitter:image" content="assets/og.png">
     <link rel="icon" href="assets/arboxing-logo.png">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.telemetrydeck.com/websdk/telemetrydeck.min.js" data-app-id="989FD1F8-1036-48DD-991A-6BE578E1F6BE"></script>
+    <script src="assets/telemetry.js" defer></script>
   </head>
   <body>
     <main>
@@ -27,7 +29,7 @@
             <img src="assets/arboxing-logo.png" width="46" height="46" alt="AR Boxing logo">
             <span>AR Boxing</span>
           </a>
-          <a class="app-store compact" href="#pricing">
+          <a class="app-store compact" href="#pricing" data-app-store-cta data-cta-location="sticky_header">
             <span>Coming Soon on the</span>
             <strong>App Store</strong>
           </a>
@@ -41,7 +43,7 @@
             <p class="lede">Turn shadow boxing into an interactive workout using your iPhone camera. No extra tracking equipment required.</p>
             <p class="controller-line">Your body is the controller.</p>
             <div class="cta-row">
-              <a class="app-store" href="#pricing">
+              <a class="app-store" href="#pricing" data-app-store-cta data-cta-location="hero">
                 <span>Coming Soon on the</span>
                 <strong>App Store</strong>
               </a>
@@ -262,6 +264,10 @@
           </article>
         </div>
         <p class="store-note">Purchases happen through the iOS app and App Store. No introductory free trial is currently offered.</p>
+        <a class="app-store pricing-cta" href="#pricing" data-app-store-cta data-cta-location="pricing">
+          <span>Coming Soon on the</span>
+          <strong>App Store</strong>
+        </a>
       </section>
 
       <section class="section faq" aria-labelledby="faq-title">
@@ -302,7 +308,7 @@
         <p class="eyebrow">Your next round starts now.</p>
         <h2 id="final-title">Boxing. Turned into a game.</h2>
         <p>Turn boxing practice into an interactive training experience.</p>
-        <a class="app-store" href="#pricing">
+        <a class="app-store" href="#pricing" data-app-store-cta data-cta-location="mid_page">
           <span>Coming Soon on the</span>
           <strong>App Store</strong>
         </a>
@@ -317,7 +323,7 @@
           <p class="disclaimer">AR Boxing is a fitness and training tool and does not replace qualified boxing instruction, professional coaching, or medical advice.</p>
         </div>
         <div class="footer-links" aria-label="Footer links">
-          <a href="#pricing">Download</a>
+          <a href="#pricing" data-app-store-cta data-cta-location="footer">Download</a>
           <a href="privacy/">Privacy Policy</a>
           <a href="mailto:support@arboxing.app">Support</a>
           <a href="terms/">Terms / EULA</a>
