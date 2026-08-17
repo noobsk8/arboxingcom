@@ -33,6 +33,17 @@
       apple_campaign_key: "instagram_organic",
       app_store_url: ""
     },
+    "/youtube": {
+      source: "youtube",
+      medium: "organic_social",
+      campaign: "launch",
+      content: "founder_account",
+      traffic_type: "organic_social",
+      platform: "youtube",
+      creator_id: "",
+      apple_campaign_key: "youtube_organic",
+      app_store_url: ""
+    },
     "/mikeboxing": {
       source: "tiktok",
       medium: "ugc",

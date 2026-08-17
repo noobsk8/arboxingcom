@@ -20,6 +20,7 @@ The autoplay hero video is not tracked. Add `ar_boxing_web.video_played` only if
 
 - `https://arboxing.app/tiktok` maps to TikTok organic founder traffic.
 - `https://arboxing.app/instagram` maps to Instagram organic founder traffic.
+- `https://arboxing.app/youtube` maps to YouTube organic founder traffic.
 - `https://arboxing.app/mikeboxing` maps to the sample creator campaign.
 
 Unknown creator-style paths are handled by `404.html` and passed to the home page as `campaign_path`. Asset-like 404 paths are not redirected as campaign visits.
@@ -67,6 +68,7 @@ When the App Store product page exists:
 - Root direct visit: `https://arboxing.app/`
 - Organic TikTok path: `https://arboxing.app/tiktok`
 - Organic Instagram path: `https://arboxing.app/instagram`
+- Organic YouTube path: `https://arboxing.app/youtube`
 - Known creator path: `https://arboxing.app/mikeboxing`
 - Unknown creator path: `https://arboxing.app/coach_james`
 - Valid UTM URL
