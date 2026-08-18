@@ -13,11 +13,12 @@ This site uses TelemetryDeck for privacy-friendly website acquisition analytics.
 - `ar_boxing_web.page_viewed`
 - `ar_boxing_web.app_store_clicked`
 - `ar_boxing_web.pricing_viewed`
+- `ar_boxing_web.waitlist_cta_clicked`
 - `ar_boxing_web.waitlist_submitted`
 
 The autoplay hero video is not tracked. Add `ar_boxing_web.video_played` only if the site later has a meaningful user-initiated video play action.
 
-Waitlist emails are submitted to Formspree. TelemetryDeck only receives the waitlist event and attribution fields; the email address is not sent to TelemetryDeck.
+Waitlist emails are submitted to Formspree. TelemetryDeck only receives CTA/submission events and attribution fields; the email address is not sent to TelemetryDeck.
 
 ## Current Campaign Paths
 
@@ -56,9 +57,9 @@ Attribution is preserved in `sessionStorage` during the visit.
 
 ## App Store Links
 
-All App Store CTAs use `assets/telemetry.js`.
+While the app is pre-launch, primary CTAs point to the waitlist form. When the app is published, App Store CTAs should use `assets/telemetry.js`.
 
-The app is currently pre-launch, so `DEFAULT_APP_STORE_URL` is empty and CTAs fall back to `#pricing` while logging `destination = app_store_pending`.
+The app is currently pre-launch, so `DEFAULT_APP_STORE_URL` is empty and public CTAs should stay focused on the waitlist.
 
 When the App Store product page exists:
 

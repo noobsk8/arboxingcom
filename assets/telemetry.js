@@ -444,6 +444,20 @@
     });
   }
 
+  function setupWaitlistCtas() {
+    document.querySelectorAll("[data-waitlist-cta]").forEach(function (cta) {
+      cta.addEventListener("click", function () {
+        sendSignal(
+          "waitlist_cta_clicked",
+          attributionPayload({
+            waitlist_location: cleanValue(cta.getAttribute("data-waitlist-location"), "unknown"),
+            destination: "waitlist_form"
+          })
+        );
+      });
+    });
+  }
+
   function fillWaitlistAttribution(form) {
     const payload = attributionPayload({});
     form.querySelectorAll("[data-attribution-field]").forEach(function (field) {
@@ -528,6 +542,7 @@
     trackPageViewed();
     setupPricingViewed();
     setupAppStoreCtas();
+    setupWaitlistCtas();
     setupWaitlistForms();
   });
 })();
