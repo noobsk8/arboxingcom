@@ -13,8 +13,11 @@ This site uses TelemetryDeck for privacy-friendly website acquisition analytics.
 - `ar_boxing_web.page_viewed`
 - `ar_boxing_web.app_store_clicked`
 - `ar_boxing_web.pricing_viewed`
+- `ar_boxing_web.waitlist_submitted`
 
 The autoplay hero video is not tracked. Add `ar_boxing_web.video_played` only if the site later has a meaningful user-initiated video play action.
+
+Waitlist emails are submitted to Formspree. TelemetryDeck only receives the waitlist event and attribution fields; the email address is not sent to TelemetryDeck.
 
 ## Current Campaign Paths
 

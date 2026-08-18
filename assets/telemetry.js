@@ -327,6 +327,24 @@
     };
   }
 
+  function attributionPayload(extra) {
+    const attribution = resolveAttribution();
+    return {
+      page: document.documentElement.dataset.page || "home",
+      landing_path: attribution.landing_path,
+      source: attribution.source,
+      medium: attribution.medium,
+      campaign: attribution.campaign,
+      content: attribution.content,
+      traffic_type: attribution.traffic_type,
+      platform: attribution.platform,
+      creator_id: attribution.creator_id || "",
+      referrer_domain: attribution.referrer_domain || "",
+      device_type: getDeviceType(),
+      ...extra
+    };
+  }
+
   function isLocalTestMode() {
     return /^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/i.test(window.location.hostname);
   }
@@ -426,10 +444,90 @@
     });
   }
 
+  function fillWaitlistAttribution(form) {
+    const payload = attributionPayload({});
+    form.querySelectorAll("[data-attribution-field]").forEach(function (field) {
+      const key = field.getAttribute("data-attribution-field");
+      if (Object.prototype.hasOwnProperty.call(payload, key)) {
+        field.value = payload[key];
+      }
+    });
+  }
+
+  function setupWaitlistForms() {
+    document.querySelectorAll("[data-waitlist-form]").forEach(function (form) {
+      const status = form.querySelector("[data-waitlist-status]");
+      const button = form.querySelector("button[type='submit']");
+
+      fillWaitlistAttribution(form);
+
+      form.addEventListener("submit", function (event) {
+        if (!window.fetch || !window.FormData) {
+          sendSignal(
+            "waitlist_submitted",
+            attributionPayload({
+              waitlist_location: cleanValue(form.getAttribute("data-waitlist-location"), "unknown"),
+              destination: "formspree"
+            })
+          );
+          return;
+        }
+
+        event.preventDefault();
+        fillWaitlistAttribution(form);
+
+        if (button) {
+          button.disabled = true;
+          button.textContent = "Joining...";
+        }
+        if (status) {
+          status.textContent = "Joining the waitlist...";
+        }
+
+        fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" }
+        })
+          .then(function (response) {
+            if (!response.ok) {
+              throw new Error("Waitlist submit failed");
+            }
+
+            sendSignal(
+              "waitlist_submitted",
+              attributionPayload({
+                waitlist_location: cleanValue(form.getAttribute("data-waitlist-location"), "unknown"),
+                destination: "formspree"
+              })
+            );
+
+            form.reset();
+            fillWaitlistAttribution(form);
+            if (status) {
+              status.textContent = "You're on the waitlist. I'll send launch updates when AR Boxing is ready.";
+            }
+          })
+          .catch(function () {
+            if (status) {
+              status.textContent = "That did not go through. Please try again in a moment.";
+            }
+          })
+          .finally(function () {
+            if (button) {
+              button.disabled = false;
+              button.textContent = "Join Waitlist";
+            }
+          });
+      });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     resolveAttribution();
     trackPageViewed();
     setupPricingViewed();
     setupAppStoreCtas();
+    setupWaitlistForms();
   });
 })();
