@@ -692,6 +692,93 @@ h3 {
   text-transform: uppercase;
 }
 
+.generator-tool {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  margin-top: 36px;
+  padding: 24px;
+}
+
+.generator-controls {
+  display: grid;
+  gap: 14px;
+}
+
+.generator-controls label {
+  color: white;
+  display: grid;
+  font-weight: 900;
+  gap: 8px;
+  text-transform: uppercase;
+}
+
+.generator-controls select {
+  background: #070708;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: white;
+  font: inherit;
+  min-height: 48px;
+  padding: 0 12px;
+}
+
+.generator-controls .check-control {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  line-height: 1.4;
+  text-transform: none;
+}
+
+.generator-controls input[type="checkbox"] {
+  accent-color: var(--red);
+  height: 20px;
+  width: 20px;
+}
+
+.generator-controls button {
+  background: var(--red);
+  border: 1px solid var(--red);
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 900;
+  min-height: 54px;
+  text-transform: uppercase;
+}
+
+.combo-output {
+  background: #09090a;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.combo-output ol {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding-left: 22px;
+}
+
+.combo-output li {
+  color: white;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.combo-output p:not(.eyebrow) {
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
 .privacy-panel p,
 .text-block p:first-child {
   color: white;
@@ -893,6 +980,7 @@ h3 {
 
   .hero-grid,
   .split,
+  .generator-tool,
   .feature-panel.large,
   .timer-panel,
   .screenshot-panel,

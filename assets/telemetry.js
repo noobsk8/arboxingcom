@@ -472,6 +472,30 @@
     });
   }
 
+  function setupComboGeneratorEvents() {
+    document.querySelectorAll("[data-combo-generator]").forEach(function (tool) {
+      const generateButton = tool.querySelector("[data-generate-combo]");
+      const lengthInput = tool.querySelector("[data-combo-length]");
+      const focusInput = tool.querySelector("[data-combo-focus]");
+      const defenseInput = tool.querySelector("[data-combo-defense]");
+
+      if (!generateButton || !lengthInput || !focusInput || !defenseInput) {
+        return;
+      }
+
+      generateButton.addEventListener("click", function () {
+        sendSignal(
+          "combo_generated",
+          attributionPayload({
+            combo_length: cleanValue(lengthInput.value, "unknown"),
+            combo_focus: cleanValue(focusInput.value, "unknown"),
+            includes_defense: defenseInput.checked ? "true" : "false"
+          })
+        );
+      });
+    });
+  }
+
   function fillWaitlistAttribution(form) {
     const payload = attributionPayload({});
     form.querySelectorAll("[data-attribution-field]").forEach(function (field) {
@@ -558,6 +582,7 @@
     setupAppStoreCtas();
     setupWaitlistCtas();
     setupSeoLinks();
+    setupComboGeneratorEvents();
     setupWaitlistForms();
   });
 })();
