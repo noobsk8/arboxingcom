@@ -458,6 +458,20 @@
     });
   }
 
+  function setupSeoLinks() {
+    document.querySelectorAll("[data-seo-link]").forEach(function (link) {
+      link.addEventListener("click", function () {
+        sendSignal(
+          "seo_link_clicked",
+          attributionPayload({
+            link_location: cleanValue(link.getAttribute("data-seo-location"), "unknown"),
+            link_target: cleanValue(link.getAttribute("data-seo-target"), "unknown")
+          })
+        );
+      });
+    });
+  }
+
   function fillWaitlistAttribution(form) {
     const payload = attributionPayload({});
     form.querySelectorAll("[data-attribution-field]").forEach(function (field) {
@@ -543,6 +557,7 @@
     setupPricingViewed();
     setupAppStoreCtas();
     setupWaitlistCtas();
+    setupSeoLinks();
     setupWaitlistForms();
   });
 })();

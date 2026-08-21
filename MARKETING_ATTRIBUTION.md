@@ -13,6 +13,7 @@ This site uses TelemetryDeck for privacy-friendly website acquisition analytics.
 - `ar_boxing_web.page_viewed`
 - `ar_boxing_web.app_store_clicked`
 - `ar_boxing_web.pricing_viewed`
+- `ar_boxing_web.seo_link_clicked`
 - `ar_boxing_web.waitlist_cta_clicked`
 - `ar_boxing_web.waitlist_submitted`
 
