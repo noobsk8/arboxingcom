@@ -692,6 +692,59 @@ h3 {
   text-transform: uppercase;
 }
 
+.demo-video-slot p {
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.clip-workflow {
+  align-items: center;
+}
+
+.clip-steps {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.clip-steps article {
+  background: #101012;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.clip-steps span {
+  color: var(--red);
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.clip-steps h3 {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+
+.clip-demo-panel {
+  align-items: center;
+  display: grid;
+  gap: 22px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(120px, 0.45fr);
+}
+
+.vertical-video-slot {
+  aspect-ratio: 9 / 16;
+  min-height: 420px;
+}
+
+.mini-shot {
+  max-width: 190px;
+  padding: 8px;
+}
+
 .generator-tool {
   background: var(--panel);
   border: 1px solid var(--line);
@@ -981,6 +1034,7 @@ h3 {
   .hero-grid,
   .split,
   .generator-tool,
+  .clip-demo-panel,
   .feature-panel.large,
   .timer-panel,
   .screenshot-panel,
