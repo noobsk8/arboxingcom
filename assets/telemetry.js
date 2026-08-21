@@ -54,6 +54,39 @@
       creator_id: "mikeboxing",
       apple_campaign_key: "creator_mike",
       app_store_url: ""
+    },
+    "/combo": {
+      source: "shortcut",
+      medium: "direct",
+      campaign: "launch",
+      content: "combo",
+      traffic_type: "direct",
+      platform: "unknown",
+      creator_id: "",
+      apple_campaign_key: "shortcut_combo",
+      app_store_url: ""
+    },
+    "/timer": {
+      source: "shortcut",
+      medium: "direct",
+      campaign: "launch",
+      content: "timer",
+      traffic_type: "direct",
+      platform: "unknown",
+      creator_id: "",
+      apple_campaign_key: "shortcut_timer",
+      app_store_url: ""
+    },
+    "/workout": {
+      source: "shortcut",
+      medium: "direct",
+      campaign: "launch",
+      content: "workout",
+      traffic_type: "direct",
+      platform: "unknown",
+      creator_id: "",
+      apple_campaign_key: "shortcut_workout",
+      app_store_url: ""
     }
   };
 
