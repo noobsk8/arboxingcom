@@ -52,6 +52,10 @@ main {
     #060608;
 }
 
+.landing-hero {
+  min-height: auto;
+}
+
 .topbar,
 .footer {
   align-items: center;
@@ -581,6 +585,11 @@ h3 {
   margin-top: 32px;
 }
 
+.hero-shot {
+  max-width: 320px;
+  width: min(62vw, 320px);
+}
+
 .target-list,
 .metric-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -625,6 +634,48 @@ h3 {
   background: #101012;
   border-left: 5px solid var(--red);
   padding: 28px;
+}
+
+.text-block a {
+  color: white;
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-color: var(--red);
+  text-underline-offset: 4px;
+}
+
+.demo-video-slot {
+  align-items: center;
+  aspect-ratio: 16 / 9;
+  background:
+    linear-gradient(135deg, rgba(241, 50, 53, 0.24), transparent 45%),
+    #101012;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  padding: 28px;
+  text-align: center;
+}
+
+.demo-video-slot div {
+  display: grid;
+  gap: 12px;
+}
+
+.demo-video-slot span {
+  color: var(--red);
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.demo-video-slot strong {
+  color: white;
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .privacy-panel p,
