@@ -430,6 +430,63 @@
     sendSignal("page_viewed", commonPayload({}));
   }
 
+  function setupEngagedVisit() {
+    let fired = false;
+    let timeoutId = null;
+
+    function fire(trigger) {
+      if (fired) {
+        return;
+      }
+
+      fired = true;
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+      window.removeEventListener("scroll", handleScroll);
+
+      sendSignal(
+        "engaged_visit",
+        attributionPayload({
+          engagement_trigger: trigger
+        })
+      );
+    }
+
+    function getScrollDepth() {
+      const doc = document.documentElement;
+      const body = document.body;
+      const scrollTop = window.scrollY || doc.scrollTop || body.scrollTop || 0;
+      const viewportHeight = window.innerHeight || doc.clientHeight || 0;
+      const scrollHeight = Math.max(
+        body.scrollHeight,
+        body.offsetHeight,
+        doc.clientHeight,
+        doc.scrollHeight,
+        doc.offsetHeight
+      );
+
+      if (scrollHeight <= viewportHeight) {
+        return 0;
+      }
+
+      return (scrollTop + viewportHeight) / scrollHeight;
+    }
+
+    function handleScroll() {
+      if (getScrollDepth() >= 0.5) {
+        fire("scroll_50");
+      }
+    }
+
+    timeoutId = window.setTimeout(function () {
+      fire("time_15s");
+    }, 15000);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+  }
+
   function setupPricingViewed() {
     const pricing = document.getElementById("pricing");
     if (!pricing || !("IntersectionObserver" in window)) {
@@ -611,6 +668,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     resolveAttribution();
     trackPageViewed();
+    setupEngagedVisit();
     setupPricingViewed();
     setupAppStoreCtas();
     setupWaitlistCtas();
