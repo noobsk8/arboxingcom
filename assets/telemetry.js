@@ -7,7 +7,7 @@
   const SIGNAL_PREFIX = "ar_boxing_web.";
   const ATTRIBUTION_KEY = "ar_boxing_web_attribution_v1";
   const CLIENT_KEY = "ar_boxing_web_client_v1";
-  const DEFAULT_APP_STORE_URL = "";
+  const DEFAULT_APP_STORE_URL = "https://apps.apple.com/app/ar-boxing-workout-training/id6802110484";
   const DEFAULT_APP_STORE_DESTINATION = "#pricing";
 
   const CAMPAIGNS = {
@@ -647,7 +647,7 @@
             form.reset();
             fillWaitlistAttribution(form);
             if (status) {
-              status.textContent = "You're on the waitlist. I'll send launch updates when AR Boxing is ready.";
+              status.textContent = "You're signed up. I'll send occasional AR Boxing updates.";
             }
           })
           .catch(function () {
@@ -658,7 +658,7 @@
           .finally(function () {
             if (button) {
               button.disabled = false;
-              button.textContent = "Join Waitlist";
+              button.textContent = "Get Updates";
             }
           });
       });

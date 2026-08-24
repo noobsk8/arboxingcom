@@ -58,15 +58,17 @@ Attribution is preserved in `sessionStorage` during the visit.
 
 ## App Store Links
 
-While the app is pre-launch, primary CTAs point to the waitlist form. When the app is published, App Store CTAs should use `assets/telemetry.js`.
+Primary CTAs point to the App Store and use `assets/telemetry.js` for attribution and click tracking.
 
-The app is currently pre-launch, so `DEFAULT_APP_STORE_URL` is empty and public CTAs should stay focused on the waitlist.
+The live App Store URL is:
 
-When the App Store product page exists:
+```text
+https://apps.apple.com/app/ar-boxing-workout-training/id6802110484
+```
 
-1. Set `DEFAULT_APP_STORE_URL` in `assets/telemetry.js`.
-2. Add Apple-generated campaign URLs to individual campaign objects when available.
-3. Do not invent Apple campaign link parameters.
+Campaign-specific Apple URLs can be added later if App Store Connect campaign links are created.
+
+Do not invent Apple campaign link parameters.
 
 ## Manual Test Checklist
 
