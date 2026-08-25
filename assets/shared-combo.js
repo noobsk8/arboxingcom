@@ -45,12 +45,17 @@
     }
   }
 
-  function canonicalCurrentUrl() {
-    const url = new URL(window.location.href);
-    if (url.pathname !== "/combo") {
-      url.pathname = "/combo";
+  function appOpenUrl(result) {
+    const params = readParams();
+    const appParams = new URLSearchParams();
+    appParams.set("v", SUPPORTED_VERSION);
+    appParams.set("c", result.tokens.join("-"));
+
+    if (params.get("src")) {
+      appParams.set("src", params.get("src"));
     }
-    return url.href;
+
+    return "arboxing://combo?" + appParams.toString();
   }
 
   function cleanSource(value) {
@@ -133,7 +138,7 @@
 
     const openLink = document.querySelector("[data-open-combo-app]");
     if (openLink) {
-      openLink.href = canonicalCurrentUrl();
+      openLink.href = appOpenUrl(result);
       openLink.addEventListener("click", function () {
         emitSharedComboEvent({
           action: "open_in_app_clicked",
