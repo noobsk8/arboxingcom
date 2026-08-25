@@ -827,6 +827,42 @@ h3 {
   margin: 0;
 }
 
+.shared-combo-page {
+  min-height: calc(100vh - 260px);
+}
+
+.shared-combo-shell {
+  align-items: start;
+  display: grid;
+  gap: clamp(24px, 5vw, 72px);
+  grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.65fr);
+  margin: 0 auto;
+  max-width: 1180px;
+}
+
+.shared-combo-copy h1 {
+  color: white;
+  font-size: clamp(3.2rem, 9vw, 7.4rem);
+  letter-spacing: 0;
+  line-height: 0.92;
+  margin: 0 0 24px;
+  text-transform: uppercase;
+}
+
+.shared-combo-source,
+.shared-combo-note {
+  color: var(--muted);
+  font-weight: 800;
+  line-height: 1.5;
+  margin-top: 18px;
+}
+
+.shared-combo-card {
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  position: sticky;
+  top: 24px;
+}
+
 .privacy-panel p,
 .text-block p:first-child {
   color: white;
@@ -1029,6 +1065,7 @@ h3 {
   .hero-grid,
   .split,
   .generator-tool,
+  .shared-combo-shell,
   .feature-panel.large,
   .timer-panel,
   .screenshot-panel,

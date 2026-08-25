@@ -586,6 +586,22 @@
     });
   }
 
+  function setupSharedComboEvents() {
+    window.addEventListener("arboxing:shared_combo", function (event) {
+      const detail = event.detail || {};
+      sendSignal(
+        "shared_combo",
+        attributionPayload({
+          combo_action: cleanValue(detail.action, "unknown"),
+          combo_valid: detail.valid === "true" ? "true" : "false",
+          combo_length: cleanValue(detail.combo_length, "unknown"),
+          combo_source: cleanValue(detail.combo_source, "none"),
+          error_reason: cleanValue(detail.error_reason, "none")
+        })
+      );
+    });
+  }
+
   function fillWaitlistAttribution(form) {
     const payload = attributionPayload({});
     form.querySelectorAll("[data-attribution-field]").forEach(function (field) {
@@ -674,6 +690,7 @@
     setupWaitlistCtas();
     setupSeoLinks();
     setupComboGeneratorEvents();
+    setupSharedComboEvents();
     setupWaitlistForms();
   });
 })();

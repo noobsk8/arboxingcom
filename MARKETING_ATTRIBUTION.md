@@ -16,6 +16,7 @@ This site uses TelemetryDeck for privacy-friendly website acquisition analytics.
 - `ar_boxing_web.seo_link_clicked`
 - `ar_boxing_web.waitlist_cta_clicked`
 - `ar_boxing_web.waitlist_submitted`
+- `ar_boxing_web.shared_combo`
 
 The autoplay hero video is not tracked. Add `ar_boxing_web.video_played` only if the site later has a meaningful user-initiated video play action.
 
@@ -27,6 +28,7 @@ Waitlist emails are submitted to Formspree. TelemetryDeck only receives CTA/subm
 - `https://arboxing.app/instagram` maps to Instagram organic founder traffic.
 - `https://arboxing.app/youtube` maps to YouTube organic founder traffic.
 - `https://arboxing.app/mikeboxing` maps to the sample creator campaign.
+- `https://arboxing.app/combo?v=1&c=...` maps to shared combo QR/link traffic.
 
 Unknown creator-style paths are handled by `404.html` and passed to the home page as `campaign_path`. Asset-like 404 paths are not redirected as campaign visits.
 
@@ -81,6 +83,10 @@ Do not invent Apple campaign link parameters.
 - Valid UTM URL
 - Malformed UTM URL
 - App Store CTA before and after navigating within the page
+- Shared combo valid URL: `https://arboxing.app/combo?v=1&c=ljh-rch-lhh-ruh`
+- Shared combo invalid token URL
+- Shared combo missing `c` URL
+- Shared combo with more than 12 moves
 - Missing Apple campaign mapping
 - TelemetryDeck blocked or unavailable
 - Mobile Safari

@@ -1,0 +1,21 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "84JNRPW938.com.rudeus.ARBoxing"
+        ],
+        "components": [
+          {
+            "/": "/combo",
+            "comment": "AR Boxing combo imports"
+          },
+          {
+            "/": "/combo/",
+            "comment": "AR Boxing combo imports with trailing slash"
+          }
+        ]
+      }
+    ]
+  }
+}
