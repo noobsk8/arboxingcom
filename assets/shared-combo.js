@@ -123,6 +123,14 @@
     }
   }
 
+  function showAppOpenFallback() {
+    window.setTimeout(function () {
+      if (!document.hidden) {
+        show("[data-open-fallback]");
+      }
+    }, 900);
+  }
+
   function renderValidCombo(result) {
     setText("[data-combo-title]", "Shared Combo");
     setText("[data-combo-message]", "Preview this combo, then open it in AR Boxing to import it.");
@@ -146,6 +154,7 @@
           combo_length: String(result.tokens.length),
           combo_source: result.source || "none"
         });
+        showAppOpenFallback();
       });
     }
 
