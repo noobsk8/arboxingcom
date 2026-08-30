@@ -24,9 +24,9 @@ Alternate between the 1-2-3 and 2-3-2. Take a breath and reset after every seque
 
 ## Round 3: Defense and rhythm
 
-Use the 1-2-slip-2 combination. Add a small step or angle after the final cross if you can stay balanced.
+Use the 1-2-slip-right-2 combination. Add a small step or angle after the final cross if you can stay balanced.
 
-**Combo:** `ljh-rch-sl-rch`
+**Combo:** `ljh-rch-sr-rch`
 
 Rest for 30 to 60 seconds between rounds. Beginners can complete one cycle; more experienced users can repeat the plan after a longer break.
 

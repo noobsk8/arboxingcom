@@ -36,11 +36,11 @@ Add a rear cross after the lead hook. Do not rush the last punch; reset your gua
 
 **AR Boxing sequence:** `ljh-rch-lhh-rch`
 
-## Combo 5: 1-2-slip-2
+## Combo 5: 1-2-slip-right-2
 
 After the jab and cross, make a small slip to the left before returning with the rear cross. Keep the movement compact instead of bending at the waist.
 
-**AR Boxing sequence:** `ljh-rch-sl-rch`
+**AR Boxing sequence:** `ljh-rch-sr-rch`
 
 ## How to practice
 

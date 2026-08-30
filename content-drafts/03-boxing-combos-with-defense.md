@@ -12,25 +12,27 @@ A boxing combination should not always end with the last punch. Adding a slip, r
 
 Keep defensive movements small and controlled. A slip moves your head off the center line; a roll bends the knees and moves under an imagined hook. Neither movement should make you lose your stance.
 
+For the orthodox examples below, use the last punch as a simple guide: after a jab, slip left; after a cross, slip right; after a lead hook, roll left.
+
 ## Three combinations to practice
 
-### 1-2-slip-2
+### 1-2-slip-right-2
 
-Throw the jab-cross, slip left, and counter with the rear cross.
+Throw the jab-cross, slip right, and counter with the rear cross.
 
-**AR Boxing sequence:** `ljh-rch-sl-rch`
+**AR Boxing sequence:** `ljh-rch-sr-rch`
 
-### 1-2-roll-3
+### 1-2-3-roll-left
 
-Throw the jab-cross, roll under an imagined return hook, and come back with the lead hook.
+Throw the jab-cross-lead hook, then roll left under an imagined return hook.
 
-**AR Boxing sequence:** `ljh-rch-rolll-lhh`
+**AR Boxing sequence:** `ljh-rch-lhh-rolll`
 
-### 1-2-3-slip-2
+### 1-2-3-2-slip-right
 
-Build from the classic 1-2-3, then move your head and finish with the rear cross.
+Build from the classic 1-2-3, add the rear cross, then slip right after the final cross.
 
-**AR Boxing sequence:** `ljh-rch-lhh-sl-rch`
+**AR Boxing sequence:** `ljh-rch-lhh-rch-sr`
 
 ## How to train the sequence
 

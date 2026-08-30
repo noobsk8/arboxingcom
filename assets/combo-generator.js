@@ -87,7 +87,7 @@
       if (!sequence.length) {
         output.appendChild(empty);
         sharePanel.hidden = true;
-        note.textContent = "Each move is compatible with the AR Boxing app’s shared combo format.";
+        note.textContent = "Each move is compatible with the AR Boxing app’s shared combo format. Orthodox rule of thumb: after a jab, slip left; after a cross, slip right; after a lead hook, roll left.";
         return;
       }
       sequence.forEach(function (token, index) {

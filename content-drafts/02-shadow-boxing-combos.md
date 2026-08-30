@@ -26,11 +26,11 @@ Use two jabs to establish distance before the cross. Keep both jabs straight and
 
 **AR Boxing sequence:** `ljh-ljh-rch`
 
-### 1-2-3-slip-2: Punch, defend, return
+### 1-2-3-roll-left: Punch, defend, return
 
 Finish the 1-2-3, make a small slip, and return with the cross. The defensive movement is part of the combination, not an afterthought.
 
-**AR Boxing sequence:** `ljh-rch-lhh-sl-rch`
+**AR Boxing sequence:** `ljh-rch-lhh-rolll`
 
 ## A beginner three-round format
 
