@@ -45,6 +45,7 @@
         "embedUrl": "https://arboxing.app/boxing-combo-generator/"
       }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
     <script src="https://cdn.telemetrydeck.com/websdk/telemetrydeck.min.js" data-app-id="989FD1F8-1036-48DD-991A-6BE578E1F6BE"></script>
     <script src="../assets/telemetry.js" defer></script>
     <script src="../assets/combo-generator.js" defer></script>
@@ -118,43 +119,65 @@
         <div class="section-heading">
           <p class="eyebrow">Free combo tool</p>
           <h2 id="generator-title">Build a quick boxing combination.</h2>
-          <p>Generate a short training sequence for shadow boxing, bag work, or custom practice. The tool uses common boxing patterns like 1-2, 1-2-3, body-head changes, and defensive exits.</p>
+          <p>Build a training sequence for shadow boxing, bag work, or custom practice. Add punches, body shots, defensive movements, rests, and repeats in the order you want to train them.</p>
         </div>
-        <div class="generator-tool" data-combo-generator>
-          <div class="generator-controls">
-            <label>
-              Combo length
-              <select data-combo-length>
-                <option value="3">3 moves</option>
-                <option value="4" selected>4 moves</option>
-                <option value="5">5 moves</option>
-                <option value="6">6 moves</option>
-              </select>
-            </label>
-            <label>
-              Focus
-              <select data-combo-focus>
-                <option value="balanced" selected>Balanced</option>
-                <option value="punches">Punch-heavy</option>
-                <option value="defense">Defense mix</option>
-                <option value="body">Body shots</option>
-              </select>
-            </label>
-            <label class="check-control">
-              <input type="checkbox" data-combo-defense checked>
-              Include slips, rolls, and guard blocks
-            </label>
-            <button type="button" data-generate-combo>Generate Combo</button>
+        <div class="generator-tool combo-builder" data-combo-generator>
+          <div class="builder-controls">
+            <div class="builder-group">
+              <h3>Head</h3>
+              <div class="move-grid" data-move-group="head"></div>
+            </div>
+            <div class="builder-group">
+              <h3>Body</h3>
+              <div class="move-grid" data-move-group="body"></div>
+            </div>
+            <div class="builder-group">
+              <h3>Low</h3>
+              <div class="move-grid" data-move-group="low"></div>
+            </div>
+            <div class="builder-group">
+              <h3>Defense</h3>
+              <div class="move-grid" data-move-group="defense"></div>
+            </div>
+            <div class="builder-group">
+              <h3>Rest / Repeat</h3>
+              <div class="move-grid" data-move-group="utility"></div>
+            </div>
           </div>
-          <div class="combo-output" aria-live="polite">
-            <p class="eyebrow">Generated combo</p>
-            <ol data-combo-output>
-              <li>Jab</li>
-              <li>Cross</li>
-              <li>Lead hook</li>
-              <li>Roll</li>
+          <div class="combo-output builder-output" aria-live="polite">
+            <div class="builder-output-heading">
+              <div>
+                <p class="eyebrow">Your combo</p>
+                <h3><span data-combo-count>0</span> / 12 moves</h3>
+              </div>
+              <button class="text-button" type="button" data-clear-combo disabled>Clear</button>
+            </div>
+            <ol class="sequence-list" data-combo-output>
+              <li class="sequence-empty" data-combo-empty>Add moves to build your sequence.</li>
             </ol>
-            <p data-combo-note>Suggested rhythm: steady pace, clean form, reset your guard after the final move.</p>
+            <p class="builder-status" data-combo-note>Each move is compatible with the AR Boxing app’s shared combo format.</p>
+            <div class="share-panel" data-share-panel hidden>
+              <label for="combo-share-link">Shareable HTTPS link</label>
+              <div class="share-link-row">
+                <input id="combo-share-link" type="text" readonly data-combo-link>
+                <button class="secondary-button small" type="button" data-copy-combo>Copy</button>
+              </div>
+              <div class="qr-area">
+                <div class="qr-box" data-combo-qr aria-label="QR code for this boxing combo"></div>
+                <div>
+                  <p class="qr-title">Scan to train this combo</p>
+                  <p class="qr-note">The QR code opens a public preview link. The app button uses the direct app link.</p>
+                  <div class="cta-row compact-actions">
+                    <a class="secondary-button small" href="#" target="_blank" rel="noopener" data-preview-combo>Preview</a>
+                    <button class="secondary-button small" type="button" data-download-qr>Download QR</button>
+                  </div>
+                </div>
+              </div>
+              <div class="cta-row builder-actions">
+                <a class="secondary-button" href="#" data-open-builder-app>Open in AR Boxing</a>
+                <a class="app-store" href="https://apps.apple.com/app/ar-boxing-workout-training/id6802110484" data-app-store-cta data-cta-location="combo_builder">Download on the <strong>App Store</strong></a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -179,7 +202,7 @@
           </article>
           <article>
             <h3>Train rhythm</h3>
-            <p>Use tempo and repetition to make a combination feel like a real round instead of a random list.</p>
+            <p>Use tempo and repetition in the app to make a combination feel like a real round instead of a loose list.</p>
           </article>
           <article>
             <h3>Practice safely</h3>

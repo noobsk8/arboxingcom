@@ -1,135 +1,138 @@
 (function () {
   "use strict";
 
-  const comboTemplates = {
-    balanced: [
-      { moves: ["Jab", "Cross", "Lead hook"], note: "Classic 1-2-3: straights set the line, then the hook changes the angle." },
-      { moves: ["Jab", "Jab", "Cross"], note: "Double jab to measure distance, then finish with the rear hand." },
-      { moves: ["Jab", "Cross", "Lead hook", "Cross"], note: "Classic 1-2-3-2: the hook loads the final cross." },
-      { moves: ["Cross", "Lead hook", "Cross"], note: "Power combo for closer range. Keep your feet under you." },
-      { moves: ["Jab", "Cross", "Lead uppercut", "Cross"], note: "Straight punches raise the guard, then the uppercut splits the middle." },
-      { moves: ["Jab", "Cross", "Lead hook", "Cross", "Step back"], note: "Finish the combination with distance instead of standing in front of the target." },
-      { moves: ["Jab", "Jab", "Cross", "Lead hook", "Cross", "Step back"], note: "Volume combination: double jab to enter, then keep the finish balanced." }
-    ],
-    punches: [
-      { moves: ["Jab", "Cross", "Lead hook"], note: "Foundational 1-2-3. Snap each hand back to guard." },
-      { moves: ["Jab", "Jab", "Cross"], note: "Use the first jab to find range and the second to set the cross." },
-      { moves: ["Cross", "Lead hook", "Cross"], note: "A compact power chain for pocket-range drilling." },
-      { moves: ["Lead hook", "Cross", "Lead hook"], note: "Hooks bookend the cross. Rotate, do not swing wide." },
-      { moves: ["Jab", "Cross", "Lead uppercut", "Cross"], note: "A real uppercut pattern: straight, straight, lift, finish." },
-      { moves: ["Jab", "Jab", "Rear uppercut", "Jab", "Cross"], note: "Double jab pressure, then uppercut through the center." },
-      { moves: ["Jab", "Cross", "Lead hook", "Rear hook", "Lead uppercut", "Cross"], note: "Longer conditioning combo. Slow it down until the form stays clean." }
-    ],
-    defense: [
-      { moves: ["Jab", "Slip right", "Cross"], note: "Hit, move your head off the center line, then counter." },
-      { moves: ["Jab", "Cross", "Roll"], note: "Finish with defense instead of admiring the combo." },
-      { moves: ["Jab", "Cross", "Slip left", "Cross"], note: "Throw the 1-2, slip the return, answer with the rear hand." },
-      { moves: ["Jab", "Cross", "Roll", "Lead hook"], note: "Roll under the imagined counter and come back with the hook." },
-      { moves: ["Jab", "Cross", "Lead hook", "Roll", "Cross"], note: "Punch in combination, defend, then finish from the new angle." },
-      { moves: ["Jab", "Jab", "Cross", "Slip left", "Cross", "Step back"], note: "Enter behind the jab, counter after the slip, then exit." }
-    ],
-    body: [
-      { moves: ["Jab", "Body jab", "Cross"], note: "Change levels with the jab, then bring the cross back upstairs." },
-      { moves: ["Jab", "Cross to body", "Lead hook"], note: "Head-body-head: sell the body shot so the hook has room." },
-      { moves: ["Jab", "Cross", "Lead hook to body"], note: "Start high, then bend your knees and dig the hook to the body." },
-      { moves: ["Jab", "Cross to body", "Lead hook", "Cross"], note: "Body shot lowers the guard, then return upstairs." },
-      { moves: ["Jab", "Body jab", "Cross", "Lead hook to body", "Lead hook"], note: "Level-change sequence: body work first, then back to the head." },
-      { moves: ["Jab", "Jab", "Cross to body", "Lead hook to body", "Lead hook", "Cross"], note: "Double jab entry into body-head finishing work." }
-    ]
+  const MAX_MOVES = 12;
+  const MOVE_GROUPS = {
+    head: [["ljh", "L Jab", "Head"], ["rch", "R Cross", "Head"], ["lhh", "L Hook", "Head"], ["rhh", "R Hook", "Head"], ["loh", "L Overhand", "Head"], ["roh", "R Overhand", "Head"], ["luh", "L Uppercut", "Head"], ["ruh", "R Uppercut", "Head"]],
+    body: [["ljb", "L Jab", "Body"], ["rcb", "R Cross", "Body"], ["lhb", "L Hook", "Body"], ["rhb", "R Hook", "Body"], ["lgb", "L Guard", "Body"], ["rgb", "R Guard", "Body"]],
+    low: [["ljl", "L Jab", "Low"], ["rcl", "R Cross", "Low"], ["lhl", "L Hook", "Low"], ["rhl", "R Hook", "Low"]],
+    defense: [["sl", "Slip Left", "Defense"], ["sr", "Slip Right", "Defense"], ["rolll", "Roll Left", "Defense"], ["rollr", "Roll Right", "Defense"], ["lgh", "L Guard", "Head"], ["rgh", "R Guard", "Head"]],
+    utility: [["rest10", "Rest", "10 sec"], ["rest30", "Rest", "30 sec"], ["repeat", "Repeat", "Combo"]]
   };
+  const labels = Object.fromEntries(Object.values(MOVE_GROUPS).flat().map(function (move) { return [move[0], move[1] + " - " + move[2]]; }));
 
-  const defenseMoves = ["Slip left", "Slip right", "Roll", "Guard block", "Step back"];
-  const notes = [
-    "Suggested rhythm: steady pace, clean form, reset your guard after the final move.",
-    "Suggested rhythm: start slow, then repeat the combo with a sharper finish.",
-    "Suggested rhythm: breathe on each punch and return to stance after the defense.",
-    "Suggested rhythm: treat the last movement as your reset before the next repetition."
-  ];
-
-  function pick(list) {
-    return list[Math.floor(Math.random() * list.length)];
+  function cleanSource(value) { return typeof value === "string" ? value.trim().replace(/[^a-z0-9_.-]/gi, "_").slice(0, 40) : ""; }
+  function currentSource() { try { return cleanSource(new URLSearchParams(window.location.search).get("src")); } catch (error) { return ""; } }
+  function makeHttpsUrl(tokens) {
+    const url = new URL("/combo", window.location.origin);
+    url.searchParams.set("v", "1");
+    url.searchParams.set("c", tokens.join("-"));
+    const source = currentSource();
+    if (source) url.searchParams.set("src", source);
+    return url.toString();
+  }
+  function makeAppUrl(tokens) {
+    const url = new URL("arboxing://combo");
+    url.searchParams.set("v", "1");
+    url.searchParams.set("c", tokens.join("-"));
+    const source = currentSource();
+    if (source) url.searchParams.set("src", source);
+    return url.toString();
+  }
+  function emit(action, extra) { window.dispatchEvent(new CustomEvent("arboxing:combo_builder", { detail: Object.assign({ action: action }, extra || {}) })); }
+  function renderQr(node, url) {
+    node.textContent = "";
+    if (!window.qrcode) { node.textContent = "QR unavailable"; return; }
+    const qr = window.qrcode(0, "M");
+    qr.addData(url);
+    qr.make();
+    node.innerHTML = qr.createImgTag(4, 8);
+    const image = node.querySelector("img");
+    if (image) { image.alt = "QR code for this AR Boxing combo"; image.width = 196; image.height = 196; }
   }
 
-  function isDefenseMove(move) {
-    return defenseMoves.includes(move);
-  }
+  function setupBuilder(tool) {
+    const output = tool.querySelector("[data-combo-output]");
+    const count = tool.querySelector("[data-combo-count]");
+    const empty = tool.querySelector("[data-combo-empty]");
+    const clear = tool.querySelector("[data-clear-combo]");
+    const note = tool.querySelector("[data-combo-note]");
+    const sharePanel = tool.querySelector("[data-share-panel]");
+    const linkInput = tool.querySelector("[data-combo-link]");
+    const qr = tool.querySelector("[data-combo-qr]");
+    const preview = tool.querySelector("[data-preview-combo]");
+    const openApp = tool.querySelector("[data-open-builder-app]");
+    const copy = tool.querySelector("[data-copy-combo]");
+    const download = tool.querySelector("[data-download-qr]");
+    const sequence = [];
 
-  function findTemplate(length, focus, includeDefense) {
-    const focusTemplates = comboTemplates[focus] || comboTemplates.balanced;
-    const pool = includeDefense ? focusTemplates.concat(comboTemplates.defense) : focusTemplates;
-    const exactMatches = pool.filter(function (template) {
-      return template.moves.length === length;
-    });
-
-    if (exactMatches.length > 0) {
-      return pick(exactMatches);
-    }
-
-    return pick(pool);
-  }
-
-  function fitComboToLength(template, length, includeDefense) {
-    const combo = template.moves.slice(0, length);
-
-    while (combo.length < length) {
-      if (includeDefense && combo.length >= length - 1) {
-        combo.push(pick(defenseMoves));
-      } else if (combo.length % 2 === 0) {
-        combo.push("Jab");
-      } else {
-        combo.push("Cross");
-      }
-    }
-
-    if (includeDefense && !combo.some(isDefenseMove) && length >= 3) {
-      combo[Math.max(1, length - 2)] = pick(defenseMoves);
-    }
-
-    return combo;
-  }
-
-  function buildCombo(length, focus, includeDefense) {
-    const template = findTemplate(length, focus, includeDefense);
-    const moves = fitComboToLength(template, length, includeDefense);
-    const originalHadDefense = template.moves.slice(0, length).some(isDefenseMove);
-    const note = includeDefense && !originalHadDefense && moves.some(isDefenseMove)
-      ? "Suggested rhythm: throw the punches cleanly, make the defensive move small, then reset your guard."
-      : template.note || pick(notes);
-
-    return {
-      moves,
-      note
-    };
-  }
-
-  function renderCombo(output, combo) {
-    output.innerHTML = "";
-    combo.moves.forEach(function (move) {
-      const item = document.createElement("li");
-      item.textContent = move;
-      output.appendChild(item);
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll("[data-combo-generator]").forEach(function (tool) {
-      const lengthInput = tool.querySelector("[data-combo-length]");
-      const focusInput = tool.querySelector("[data-combo-focus]");
-      const defenseInput = tool.querySelector("[data-combo-defense]");
-      const generateButton = tool.querySelector("[data-generate-combo]");
-      const output = tool.querySelector("[data-combo-output]");
-      const note = tool.querySelector("[data-combo-note]");
-
-      if (!lengthInput || !focusInput || !defenseInput || !generateButton || !output || !note) {
-        return;
-      }
-
-      generateButton.addEventListener("click", function () {
-        const length = Number(lengthInput.value) || 4;
-        const combo = buildCombo(length, focusInput.value, defenseInput.checked);
-        renderCombo(output, combo);
-        note.textContent = combo.note;
+    Object.entries(MOVE_GROUPS).forEach(function (entry) {
+      const group = tool.querySelector('[data-move-group="' + entry[0] + '"]');
+      if (!group) return;
+      entry[1].forEach(function (move) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "move-button";
+        button.dataset.token = move[0];
+        const strong = document.createElement("strong");
+        strong.textContent = move[1];
+        const span = document.createElement("span");
+        span.textContent = move[2];
+        button.appendChild(strong);
+        button.appendChild(span);
+        button.addEventListener("click", function () {
+          if (sequence.length >= MAX_MOVES) { note.textContent = "Your combo is full. Remove a move before adding another."; return; }
+          sequence.push(move[0]);
+          emit("move_added", { combo_length: String(sequence.length), move: move[0] });
+          render();
+        });
+        group.appendChild(button);
       });
     });
-  });
+
+    function render() {
+      count.textContent = String(sequence.length);
+      clear.disabled = sequence.length === 0;
+      output.textContent = "";
+      if (!sequence.length) {
+        output.appendChild(empty);
+        sharePanel.hidden = true;
+        note.textContent = "Each move is compatible with the AR Boxing app’s shared combo format.";
+        return;
+      }
+      sequence.forEach(function (token, index) {
+        const item = document.createElement("li");
+        item.className = "sequence-item";
+        const text = document.createElement("span");
+        text.textContent = labels[token];
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "remove-move";
+        remove.textContent = "Remove";
+        remove.addEventListener("click", function () { sequence.splice(index, 1); emit("move_removed", { combo_length: String(sequence.length), move: token }); render(); });
+        item.appendChild(text);
+        item.appendChild(remove);
+        output.appendChild(item);
+      });
+      updateShare();
+    }
+    function updateShare() {
+      const publicUrl = makeHttpsUrl(sequence);
+      linkInput.value = publicUrl;
+      preview.href = publicUrl;
+      openApp.href = makeAppUrl(sequence);
+      renderQr(qr, publicUrl);
+      sharePanel.hidden = false;
+      note.textContent = "Share the HTTPS link or QR code. Use Open in AR Boxing to send this combo directly to the app.";
+      emit("link_generated", { combo_length: String(sequence.length) });
+    }
+    clear.addEventListener("click", function () { sequence.length = 0; emit("cleared"); render(); });
+    copy.addEventListener("click", function () {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+      navigator.clipboard.writeText(linkInput.value).then(function () { copy.textContent = "Copied"; window.setTimeout(function () { copy.textContent = "Copy"; }, 1400); }).catch(function () {});
+    });
+    download.addEventListener("click", function () {
+      const image = qr.querySelector("img");
+      if (!image) return;
+      const anchor = document.createElement("a");
+      anchor.href = image.src;
+      anchor.download = "ar-boxing-combo-qr.png";
+      anchor.click();
+      emit("qr_downloaded", { combo_length: String(sequence.length) });
+    });
+    openApp.addEventListener("click", function () { emit("open_in_app_clicked", { combo_length: String(sequence.length) }); });
+    render();
+    emit("opened");
+  }
+  document.addEventListener("DOMContentLoaded", function () { document.querySelectorAll("[data-combo-generator]").forEach(setupBuilder); });
 })();
