@@ -1136,6 +1136,34 @@ h3 {
   padding: 4px 8px;
 }
 
+.article-combo {
+  align-items: center;
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.article-combo .combo-code {
+  margin: 0;
+}
+
+.article-combo > img,
+.article-qr-pair img {
+  background: white;
+  border-radius: 6px;
+  flex: 0 0 auto;
+  height: 132px;
+  object-fit: contain;
+  padding: 6px;
+  width: 132px;
+}
+
+.article-qr-pair {
+  display: flex;
+  gap: 10px;
+}
+
 .article-media-slot {
   border: 1px dashed var(--line);
   border-radius: 8px;
